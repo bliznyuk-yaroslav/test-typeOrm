@@ -1,5 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Role } from './role.entity';
 @Entity({ name: 'users' })
 export class User {
   @PrimaryGeneratedColumn()
@@ -10,4 +16,8 @@ export class User {
 
   @Column({ type: 'varchar', length: 160, unique: true })
   email: string;
+
+  @ManyToOne(() => Role, (role) => role.users, { eager: true })
+  @JoinColumn({ name: 'role_id' })
+  role: Role;
 }
