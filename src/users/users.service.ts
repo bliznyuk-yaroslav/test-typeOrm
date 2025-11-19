@@ -21,4 +21,7 @@ export class UsersService {
   async findAll(): Promise<User[]> {
     return this.usersRepo.find();
   }
+  async findOne(id: number) {
+    return this.usersRepo.findOne({ where: { id } });
+  }
 }
